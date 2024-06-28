@@ -1,4 +1,4 @@
-package myapp
+package taskr
 
 import (
 	"os"

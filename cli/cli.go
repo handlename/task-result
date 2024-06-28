@@ -6,7 +6,7 @@ import (
 	"os"
 	"os/signal"
 
-	myapp "github.com/handlename/my-golang-template"
+	taskr "github.com/handlename/task-result"
 	"github.com/rs/zerolog/log"
 )
 
@@ -24,18 +24,15 @@ func Run() ExitCode {
 		return ExitCodeError
 	}
 
-	myapp.InitLogger(flags.LogLevel)
+	taskr.InitLogger(flags.LogLevel)
 
 	if flags.Version {
-		log.Info().Msgf("myapp v%s", myapp.Version)
+		log.Info().Msgf("task-result v%s", taskr.Version)
 		return ExitCodeOK
 	}
 
-	// TODO: build options for new App
-
-	app := myapp.NewApp()
-
-	// TODO: build options to run App
+	app := taskr.NewApp()
+	app.OutRaw = flags.OutRaw
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer stop()
