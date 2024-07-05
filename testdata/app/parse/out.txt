@@ -1,0 +1,17 @@
+task: [echo] echo "Hello, World!"
+[echo] Hello, World!
+task: [cal] cal
+[cal]      June 2024        
+[cal] Su Mo Tu We Th Fr Sa  
+[cal]                    1  
+[cal]  2  3  4  5  6  7  8  
+[cal]  9 10 11 12 13 14 15  
+[cal] 16 17 18 19 20 21 22  
+[cal] 23 24 25 26 27 28 29  
+[cal] 30                    
+task: [ls] ls -la
+[ls] total 16
+[ls] drwxr-xr-x@ 4 nagata-hiroaki  staff  128 Jun 28 17:12 .
+[ls] drwxr-xr-x@ 3 nagata-hiroaki  staff   96 Jun 28 17:05 ..
+[ls] -rw-r--r--  1 nagata-hiroaki  staff  226 Jun 28 17:10 Taskfile.yaml
+[ls] -rw-r--r--@ 1 nagata-hiroaki  staff  321 Jun 28 17:12 out.txt
