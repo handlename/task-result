@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 	"regexp"
 
@@ -25,7 +26,7 @@ func NewApp() *App {
 }
 
 func (app *App) Run(ctx context.Context) error {
-	b, err := app.parse(ctx)
+	b, err := app.ParseStdin(ctx)
 	if err != nil {
 		return err
 	}
@@ -35,8 +36,12 @@ func (app *App) Run(ctx context.Context) error {
 	return nil
 }
 
-func (app *App) parse(_ context.Context) ([]byte, error) {
-	scanner := bufio.NewScanner(os.Stdin)
+func (app *App) ParseStdin(ctx context.Context) ([]byte, error) {
+	return app.Parse(ctx, os.Stdin)
+}
+
+func (app *App) Parse(_ context.Context, r io.Reader) ([]byte, error) {
+	scanner := bufio.NewScanner(r)
 	results := []Result{}
 	var currentResult *Result
 
@@ -89,13 +94,13 @@ func (app *App) parse(_ context.Context) ([]byte, error) {
 		results = append(results, *currentResult)
 	}
 
-	r, err := json.Marshal(results)
+	ret, err := json.Marshal(results)
 	if err != nil {
 		log.Error().Err(err).Msg("failed to marshal results")
 		return nil, err
 	}
 
-	return r, nil
+	return ret, nil
 }
 
 type Result struct {
