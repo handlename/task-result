@@ -1,0 +1,22 @@
+version: '3'
+
+output: 'prefixed'
+
+tasks:
+  default:
+    cmds:
+      - task: echo
+      - task: cal
+      - task: ls
+
+  echo:
+    cmds:
+      - echo "Hello, World!"
+
+  cal:
+    cmds:
+      - cal
+
+  ls:
+    cmds:
+      - ls -la
