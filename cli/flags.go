@@ -39,6 +39,10 @@ func parseFlags(appname string, args []string) (*Flags, error) {
 		return nil, failure.Wrap(err, failure.Message("failed to parse flags"))
 	}
 
+	if flags.Version {
+		return flags, nil
+	}
+
 	rest := fs.Args()
 	if len(rest) != 1 {
 		return nil, failure.New(errorcode.ErrInvalidArgument, failure.Message(`only one source path is required`))
