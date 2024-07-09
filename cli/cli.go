@@ -3,6 +3,7 @@ package cli
 import (
 	"context"
 	"errors"
+	"io"
 	"os"
 	"os/signal"
 
@@ -34,10 +35,17 @@ func Run() ExitCode {
 	app := taskr.NewApp()
 	app.OutRaw = flags.OutRaw
 
+	src, err := openSource(flags.Source)
+	if err != nil {
+		log.Error().Str("path", flags.Source).Msgf("failed to open source")
+		return ExitCodeError
+	}
+	defer src.Close()
+
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer stop()
 
-	if err := app.Run(ctx); err != nil {
+	if err := app.Run(ctx, src); err != nil {
 		if errors.Is(err, context.Canceled) {
 			log.Error().Msg("canceled")
 		} else {
@@ -48,4 +56,17 @@ func Run() ExitCode {
 	}
 
 	return ExitCodeOK
+}
+
+func openSource(path string) (io.ReadCloser, error) {
+	if path == "-" {
+		return os.Stdin, nil
+	}
+
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+
+	return file, nil
 }

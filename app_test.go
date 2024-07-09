@@ -50,6 +50,7 @@ func TestAppParse(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer out.Close()
 
 	ctx := context.Background()
 	app := NewApp()

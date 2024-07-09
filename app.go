@@ -25,8 +25,8 @@ func NewApp() *App {
 	return &App{}
 }
 
-func (app *App) Run(ctx context.Context) error {
-	b, err := app.ParseStdin(ctx)
+func (app *App) Run(ctx context.Context, src io.Reader) error {
+	b, err := app.Parse(ctx, src)
 	if err != nil {
 		return err
 	}
