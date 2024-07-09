@@ -3,6 +3,7 @@ package cli
 import (
 	"context"
 	"errors"
+	"fmt"
 	"io"
 	"os"
 	"os/signal"
@@ -28,7 +29,7 @@ func Run() ExitCode {
 	taskr.InitLogger(flags.LogLevel)
 
 	if flags.Version {
-		log.Info().Msgf("task-result v%s", taskr.Version)
+		fmt.Printf("%s v%s", os.Args[0], taskr.Version)
 		return ExitCodeOK
 	}
 
