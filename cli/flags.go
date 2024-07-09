@@ -2,6 +2,7 @@ package cli
 
 import (
 	"flag"
+	"fmt"
 
 	"github.com/handlename/task-result/internal/errorcode"
 	"github.com/morikuni/failure/v2"
@@ -20,6 +21,15 @@ func parseFlags(appname string, args []string) (*Flags, error) {
 	flags := &Flags{}
 
 	fs := flag.NewFlagSet(appname, flag.ExitOnError)
+	fs.Usage = func() {
+		u := `Usage of %s:
+%s [flags...] source_path
+  source_path
+        Path to output of task. If set "-", it reads stdin.
+`
+		fmt.Fprintf(flag.CommandLine.Output(), u, appname, appname)
+		fs.PrintDefaults()
+	}
 
 	fs.BoolVar(&flags.Version, "version", false, "Print version")
 	fs.StringVar(&flags.LogLevel, "log-level", "info", "Log level (trace, debug, info, warn, error, panic)")
