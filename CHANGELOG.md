@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.1.1](https://github.com/handlename/task-result/compare/v0.1.0...v0.1.1) - 2024-07-09
+- Fix print version by @handlename in https://github.com/handlename/task-result/pull/10
+
 ## [v0.1.0](https://github.com/handlename/task-result/compare/v0.0.3...v0.1.0) - 2024-07-09
 - Read file as source by @handlename in https://github.com/handlename/task-result/pull/8
 
