@@ -6,7 +6,19 @@ It outputs the result of the `task` in json format that is easy to use in other 
 ## Synopsis
 
 ```console
-$ task -t testdata/app/parse/Taskfile.yaml 2>&1 | taskr -out-raw | jq -S
+$ go run taskr -help
+Usage of taskr:
+taskr [flags...] source_path
+  source_path
+        Path to output of task. If set "-", it reads stdin.
+  -log-level string
+        Log level (trace, debug, info, warn, error, panic) (default "info")
+  -out-raw
+        Output raw input to stderr
+  -version
+        Print version
+
+$ task -t testdata/app/parse/Taskfile.yaml 2>&1 | taskr -out-raw - | jq -S
 task: [echo] echo "Hello, World!"
 [echo] Hello, World!
 task: [cal] cal
