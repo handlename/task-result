@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.1.2](https://github.com/handlename/task-result/compare/v0.1.1...v0.1.2) - 2025-01-06
+- chore(deps): bump github.com/stretchr/testify from 1.9.0 to 1.10.0 by @dependabot in https://github.com/handlename/task-result/pull/12
+
 ## [v0.1.1](https://github.com/handlename/task-result/compare/v0.1.0...v0.1.1) - 2024-07-09
 - Fix print version by @handlename in https://github.com/handlename/task-result/pull/10
 
